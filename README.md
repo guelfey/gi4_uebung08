@@ -5,11 +5,11 @@ In dieser Aufgabe sollen Sie die Arbeitsweise eines Assemblers anhand des folgen
 * OpCode (1 Byte)
 * Register- und Adressmodusbezeichner 1. Operand (1 Byte, optional)
 * Register- und Adressmodusbezeichner 2. Operand (1 Byte, optional)
-* SI-Byte (Abkürzung steht für „Scale and Index“, 1 Byte, optional)
+* SI-Byte (Abkürzung steht für *Scale and Index*, 1 Byte, optional)
 * Displacement (4 Bytes, optional)
 * Immediate (4 Bytes, optional)
 
-Anhand der Anweisung `mov edx, [ebx+8*ecx]` wird die Bildung des Maschinencodes exemplarisch erläutert. Der Opcode wird mit Hilfe der Tabelle 1 bestimmt und entspricht in diesem Fall `0x0C`. Für die beiden Operanden muss anschließend jeweils ihr Register- und Adressmodusbezeichner bestimmt werden, die jeweils in einem Byte codiert werden und ebenfalls aus Tabelle 1 ersichtlich sind. Die Bits 0-3 des Bezeichners spezifizieren den Adressmodus, die Bits 4-7 spezifizieren, welches Register als Basis für den Adressmodus verwendet wird.
+Anhand der Anweisung `mov edx, [ebx+8*ecx]` wird die Bildung des Maschinencodes exemplarisch erläutert. Der Opcode wird mit Hilfe der entsprechende Tabelle (siehe unten) bestimmt und entspricht in diesem Fall `0x0C`. Für die beiden Operanden muss anschließend jeweils ihr Register- und Adressmodusbezeichner bestimmt werden, die jeweils in einem Byte codiert werden und ebenfalls aus der entsprechenden Tabelle (siehe unten( ersichtlich sind. Die Bits 0-3 des Bezeichners spezifizieren den Adressmodus, die Bits 4-7 spezifizieren, welches Register als Basis für den Adressmodus verwendet wird.
 
 Der erste Operand stellt ein Register dar, so dass die Bits 0-3 den Wert 0x0 annehmen. Da es sich bei dem Register des ersten Operanden um das Register `edx` handelt, nehmen die Bits 4-7 den Wert 0x3 an. Somit besitzt der Register- und Adressmodusbezeichner des ersten Operanden den Wert `0x30`.
 
@@ -23,28 +23,57 @@ Somit ergibt sich für die exemplarische Anweisung der Maschinencode `0x0C30148
 	* Markieren Sie die Pseudooperationen im Quelltext.
 	* Errechnen Sie die Länge der einzelnen Befehle und geben Sie diese am Zeilenen- de in Klammern an.
 	* Schreiben Sie vor jede Zeile im Quellcode den entsprechenden Locationcounter.
-	* Generieren Sie die Symboltabelle des Assemblers, verwenden Sie hierzu dienachfolgende Tabelle.
+	* Generieren Sie die Symboltabelle des Assemblers, verwenden Sie hierzu die nachfolgende Tabelle.
 	* Geben Sie die Länge des Code- und des Datensegmentes sowie die Gesamtlänge an.
 
 3. Vollziehen Sie nun die Phase 2 des Assemblers nach, indem Sie eine Objektdatei im in der Vorlesung vorgestellten Objektformat erzeugen. Zur Vereinfachung können alle Zahlen im *Big Endian*-Format dargestellt werden, außerdem seien alle Sprünge relativ und alle Funktionsaufrufe absolut. Kodieren Sie, soweit möglich, genau drei Befehle in einem T-Datensatz. Nutzen Sie auch den den S-Datensatz. Gehen Sie davon aus, dass der Dateiname und damit auch der Modulname *cntdwn* lautet.
 
-{% highlight nasm %}
-SECTION .text
-extern printf
-extern exit
-global main
-global msgmain:push ebpmov ebp , esp
-sub esp, 4mov ebx, 0x39mov dword [ebp-4], 0x30schleife:cmp ebx , dword [ebp -4]
-je endemov byte [msg+msg_len -4], blpush dword msg
-call printf
-add esp, 4dec ebxjmp schleifeende:add esp, 4
-pop ebppush dword 0
-call exit
-add esp, 4mov eax, 1
-mov ebx, 0
-int 0x80SECTION .dataCR equ 13LF equ 10msg db "Hello World! ebx = ?", CR, LF, 0
-msg_len equ $ - msg
-{% endhighlight %}
+```assembler
+	SECTION .text
+	extern printf
+	extern exit
+	global main
+	global msg
+	
+	main:
+	push ebp
+	mov ebp , esp
+	sub esp, 4
+	
+	mov ebx, 0x39
+	mov dword [ebp-4], 0x30
+	
+	schleife:
+	cmp ebx , dword [ebp-4]
+	je ende
+	
+	mov byte [msg+msg_len -4], bl
+	
+	push dword msg
+	call printf
+	add esp, 4
+	
+	dec ebx
+	jmp schleife
+	
+	ende:
+	add esp, 4
+	pop ebp
+	
+	push dword 0
+	call exit
+	add esp, 4
+	
+	mov eax, 1
+	mov ebx, 0
+	int 0x80
+	
+	SECTION .data
+	CR equ 13
+	LF equ 10
+	msg db "Hello World! ebx = ?", CR, LF, 0
+	msg_len equ $ - msg
+```
 
 * Symboltabele 
 
