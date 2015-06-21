@@ -78,7 +78,7 @@ Somit ergibt sich für die exemplarische Anweisung der Maschinencode `0x0C30148
 * Symboltabele 
 
 | Symbol | Typ | Wert | Global sichtbar? (Ja/Nein) | Weitere Attribute ||--------|-----|------|----------------------------|---------------------|
-| |
+| | | | | |
 | |
 | |
 | |
