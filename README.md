@@ -77,7 +77,8 @@ Somit ergibt sich für die exemplarische Anweisung der Maschinencode `0x0C30148
 
 * Symboltabele 
 
-| Symbol | Typ | Wert | Global sichtbar? (Ja/Nein) | Weitere Attribute ||--------|-----|------|----------------------------|---------------------|
+| Symbol | Typ | Wert | Global sichtbar? (Ja/Nein) | Weitere Attribute |
+|--------|-----|------|----------------------------|-------------------|
 | &#160; &nbsp; | | | | |
 | &#160; &nbsp; | | | | |
 | &#160; &nbsp; | | | | |
@@ -92,7 +93,8 @@ Somit ergibt sich für die exemplarische Anweisung der Maschinencode `0x0C30148
 * Opcodes
 
 | Mnemonic | OpCode |
-|----------|--------|| add | 0x01 |
+|----------|--------|
+| add | 0x01 |
 | sub |0x02 |
 | inc | 0x03 |
 | dec | 0x04 |
@@ -109,7 +111,8 @@ Somit ergibt sich für die exemplarische Anweisung der Maschinencode `0x0C30148
 * Adressmodus (untere 4 Bits)
 
 | Adressierungsart | Adressmodus | Beispiele |
-|------------------|-------------|-----------|| register | 0x0 | mov eax, ... |
+|------------------|-------------|-----------|
+| register | 0x0 | mov eax, ... |
 | immediate | 0x1 | push 2000 |
 | direkt | 0x2 | mov [2000], ...|
 | indirekt | 0x3 | mov [ebx], ...|
@@ -121,7 +124,8 @@ Somit ergibt sich für die exemplarische Anweisung der Maschinencode `0x0C30148
 
 | Register | Bezeichner |
 |----------|------------|
-| eax | 0x0 || ebx | 0x1 |
+| eax | 0x0 |
+| ebx | 0x1 |
 | ecx | 0x2 |
 | edx | 0x3 |
 | ebp | 0x4 |
