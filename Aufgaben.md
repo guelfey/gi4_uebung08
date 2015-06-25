@@ -19,31 +19,31 @@ main:
 05	sub esp, 4 ; (7)
 
 0C	mov ebx, 0x39 ; (7)
-13	mov dword [ebp-4], 0x30 ; (7)
+13	mov dword [ebp-4], 0x30 ; (B)
 
 schleife:
-1A	cmp ebx, dword [ebp-4] ; (7)
-21	je ende ; (6)
+1E	cmp ebx, dword [ebp-4] ; (7)
+25	je ende ; (6)
 
-27	mov byte [msg+msg_len-4], bl ; (7)
+2B	mov byte [msg+msg_len-4], bl ; (7)
 
-2E	push dword msg ; (6)
-34	call printf ; (6)
-3A	add esp, 4 ; (7)
+32	push dword msg ; (6)
+38	call printf ; (6)
+3E	add esp, 4 ; (7)
 
-41	dec ebx ; (2)
-43	jmp schleife ; (6)
+45	dec ebx ; (2)
+47	jmp schleife ; (6)
 
 ende:
-49	add esp, 4 ; (7)
-50	pop ebp ; (2)
+4D	add esp, 4 ; (7)
+54	pop ebp ; (2)
 
-52	push dword 0 ; (6)
-58	call exit ; (6)
-5E	add esp, 4 ; (7)
-65	mov eax, 1 ; (7)
-6C	mov ebx, 0 ; (7)
-73	int 0x80 ; (6)
+56	push dword 0 ; (6)
+5C	call exit ; (6)
+62	add esp, 4 ; (7)
+69	mov eax, 1 ; (7)
+70	mov ebx, 0 ; (7)
+77	int 0x80 ; (6)
 
 SECTION .data
 	CR equ 13 ; pseudo
@@ -68,8 +68,9 @@ SECTION .data
 
 ## Segmentlänge
 
-Code: 0079h
+Code: 007Dh
 
 Daten: 0017h
 
-Gesamt: 0090h
+Gesamt: 0094h
+
