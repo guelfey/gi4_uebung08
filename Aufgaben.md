@@ -41,7 +41,6 @@ ende:
 52	push dword 0 ; (6)
 58	call exit ; (6)
 5E	add esp, 4 ; (7)
-
 65	mov eax, 1 ; (7)
 6C	mov ebx, 0 ; (7)
 73	int 0x80 ; (6)
@@ -52,3 +51,17 @@ SECTION .data
 00	msg db "Hello World! ebx = ?", CR, LF, 0 ; pseudo (23)
 	msg_len equ $ - msg ; pseudo
 ```
+
+## Symboltabelle
+
+| Symbol | Typ | Wert | Global sichtbar? (Ja/Nein) | Weitere Attribute |
+|--------|-----|------|----------------------------|-------------------|
+| printf | extern | 0000 | nein | |
+| exit | extern | 0000 | nein | |
+| main | near | 0000 | ja | .text |
+| schleife | near | 001A | nein | .text |
+| ende | near | 0049 | nein | .text |
+| CR | equ | 000D | nein | |
+| LF | equ | 000A | nein | |
+| msg_len | equ | 0017 | nein | |
+| msg | BYTE | 0000 | ja | .data |
