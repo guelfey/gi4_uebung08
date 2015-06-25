@@ -14,37 +14,37 @@ SECTION .text
 	global msg ; pseudo
 
 main:
-	push ebp
-	mov ebp, esp
-	sub esp, 4
+	push ebp ; (2)
+	mov ebp, esp ; (3)
+	sub esp, 4 ; (7)
 
-	mov ebx, 0x39
-	mov dword [ebp-4], 0x30
+	mov ebx, 0x39 ; (7)
+	mov dword [ebp-4], 0x30 ; (7)
 
 schleife:
-	cmp ebx, dword [ebp-4]
-	je ende
+	cmp ebx, dword [ebp-4] ; (7)
+	je ende ; (6)
 
-	mov byte [msg+msg_len-4], bl
+	mov byte [msg+msg_len-4], bl ; (7)
 
-	push dword msg
-	call printf
-	add esp, 4
+	push dword msg ; (6)
+	call printf ; (6)
+	add esp, 4 ; (7)
 
-	dec ebx
-	jmp schleife
+	dec ebx ; (2)
+	jmp schleife ; (6)
 
 ende:
-	add esp, 4
-	pop ebp
+	add esp, 4 ; (7)
+	pop ebp ; (2)
 
-	push dword 0
-	call exit
-	add esp, 4
+	push dword 0 ; (6)
+	call exit ; (6)
+	add esp, 4 ; (7)
 
-	mov eax, 1
-	mov ebx, 0
-	int 0x80
+	mov eax, 1 ; (7)
+	mov ebx, 0 ; (7)
+	int 0x80 ; (6)
 
 SECTION .data
 	CR equ 13 ; pseudo
