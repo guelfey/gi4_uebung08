@@ -14,41 +14,41 @@ SECTION .text
 	global msg ; pseudo
 
 main:
-	push ebp ; (2)
-	mov ebp, esp ; (3)
-	sub esp, 4 ; (7)
+00	push ebp ; (2)
+02	mov ebp, esp ; (3)
+05	sub esp, 4 ; (7)
 
-	mov ebx, 0x39 ; (7)
-	mov dword [ebp-4], 0x30 ; (7)
+0C	mov ebx, 0x39 ; (7)
+13	mov dword [ebp-4], 0x30 ; (7)
 
 schleife:
-	cmp ebx, dword [ebp-4] ; (7)
-	je ende ; (6)
+1A	cmp ebx, dword [ebp-4] ; (7)
+21	je ende ; (6)
 
-	mov byte [msg+msg_len-4], bl ; (7)
+27	mov byte [msg+msg_len-4], bl ; (7)
 
-	push dword msg ; (6)
-	call printf ; (6)
-	add esp, 4 ; (7)
+2E	push dword msg ; (6)
+34	call printf ; (6)
+3A	add esp, 4 ; (7)
 
-	dec ebx ; (2)
-	jmp schleife ; (6)
+41	dec ebx ; (2)
+43	jmp schleife ; (6)
 
 ende:
-	add esp, 4 ; (7)
-	pop ebp ; (2)
+49	add esp, 4 ; (7)
+50	pop ebp ; (2)
 
-	push dword 0 ; (6)
-	call exit ; (6)
-	add esp, 4 ; (7)
+52	push dword 0 ; (6)
+58	call exit ; (6)
+5E	add esp, 4 ; (7)
 
-	mov eax, 1 ; (7)
-	mov ebx, 0 ; (7)
-	int 0x80 ; (6)
+65	mov eax, 1 ; (7)
+6C	mov ebx, 0 ; (7)
+73	int 0x80 ; (6)
 
 SECTION .data
 	CR equ 13 ; pseudo
 	LF equ 10 ; pseudo
-	msg db "Hello World! ebx = ?", CR, LF, 0 ; pseudo
+00	msg db "Hello World! ebx = ?", CR, LF, 0 ; pseudo (23)
 	msg_len equ $ - msg ; pseudo
 ```
