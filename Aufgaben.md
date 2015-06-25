@@ -65,3 +65,11 @@ SECTION .data
 | LF | equ | 000A | nein | |
 | msg_len | equ | 0017 | nein | |
 | msg | BYTE | 0000 | ja | .data |
+
+## Segmentlänge
+
+Code: 0079h
+
+Daten: 0017h
+
+Gesamt: 0090h
